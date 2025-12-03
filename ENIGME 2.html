@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Énigme 2: Qui suis-je ?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        #reponseExacteEtIndice {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            text-align: left;
+        }
+        #reponseExacte {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #resultat {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Énigme 2</h1>
+    <p>
+        Je disparais, puis je reviens,<br>
+        Toujours fidèle mais jamais à la même place.<br>
+        Certains me craignent, d’autres m’attendent.<br>
+        J’emporte des châteaux, puis je rends des plages.<br>
+        <strong>Qui suis-je ?</strong>
+    </p>
+    <input type="text" id="reponse" placeholder="Ta réponse...">
+    <button onclick="verifier()">Vérifier</button>
+    <p id="resultat"></p>
+    <!-- Section pour la réponse exacte et l'indice (cachée par défaut) -->
+    <div id="reponseExacteEtIndice">
+        <p><span id="reponseExacte">Réponse exacte : La marée.</span></p>
+        <p><strong>Indice révélé :</strong> Région où les marées sont marquées (mais encore large).</p>
+    </div>
+    <script>
+        function verifier() {
+            const reponse = document.getElementById("reponse").value.toLowerCase().trim();
+            const resultat = document.getElementById("resultat");
+            const reponseExacteEtIndice = document.getElementById("reponseExacteEtIndice");
+
+            // Mots-clés acceptés dans la réponse (incluant les fautes et expressions courantes)
+            const motsCles = [
+                "marée", "la marée", "les marées",
+                "maréee", "maré", "maree",
+                "montée de la mer", "descente de la mer",
+                "flux", "reflux"
+            ];
+
+            // Vérifie si la réponse contient au moins un mot-clé
+            const reponseCorrecte = motsCles.some(mot => reponse.includes(mot));
+
+            if (reponseCorrecte) {
+                resultat.textContent = "Bravo ! Tu as trouvé la bonne réponse.";
+                resultat.style.color = "green";
+                // Affiche la réponse exacte et l'indice
+                reponseExacteEtIndice.style.display = "block";
+            } else {
+                resultat.textContent = "Allez cherche un peu plus...";
+                resultat.style.color = "red";
+                // Cache la réponse exacte et l'indice
+                reponseExacteEtIndice.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
